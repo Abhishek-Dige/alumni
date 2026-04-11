@@ -4,9 +4,12 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { Section } from "@/components/Section";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
   const handleLogin = async () => {
     await signIn("email", {
@@ -19,6 +22,7 @@ export default function LoginPage() {
     <Section className="py-20">
       <div className="mx-auto max-w-md rounded-xl border border-border bg-background p-8">
         <h1 className="font-serif text-3xl font-semibold">Welcome back</h1>
+        {error && <p className="text-sm text-red-500">Error: {error}</p>}
         <p className="mt-2 text-sm text-muted">
           Sign in using your IIITL email.
         </p>
@@ -39,6 +43,12 @@ export default function LoginPage() {
             className="inline-flex h-11 w-full items-center justify-center rounded-md bg-brand text-sm font-semibold text-white hover:bg-brand-700"
           >
             Send Magic Link
+          </button>
+          <button
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+            className="inline-flex h-11 w-full items-center justify-center rounded-md border border-border text-sm font-semibold hover:bg-muted"
+          >
+            Continue with Google
           </button>
         </div>
 
