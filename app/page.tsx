@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-brand-50 to-background">
+      <section className="relative overflow-hidden border-b border-border bg-linear-to-b from-brand-50 to-background">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.06]"
           style={{
